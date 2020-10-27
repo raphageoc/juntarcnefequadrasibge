@@ -40,18 +40,24 @@ def download_send_bd(ft):
                         i='0'
                     instancias_edit.append(str(i))
                 data.append(";".join(instancias_edit))
-            conn = psycopg2.connect("host='localhost' port='5432' dbname='mun_covid' user='usuarioexterno' password='usuarioOGLusuarioexterno'")
-            cur = conn.cursor()
-            buffer = StringIO()
-            data_csv_format = '\n'.join(data)
-            # with open("output.csv", "w") as txt_file:
-            #     txt_file.write(data_csv_format)
-            buffer.write(data_csv_format)
-            buffer.seek(0)
-            cur.copy_from(buffer, 'faces_de_logradouros_2019', sep=';')
-            conn.commit()
-            cur.close()
-            conn.close()
+            try:
+                conn = psycopg2.connect("host='localhost' port='5432' dbname='mun_covid' user='usuarioexterno' password='usuarioOGLusuarioexterno'")
+                cur = conn.cursor()
+                buffer = StringIO()
+                data_csv_format = '\n'.join(data)
+                # with open("output.csv", "w") as txt_file:
+                #     txt_file.write(data_csv_format)
+                buffer.write(data_csv_format)
+                buffer.seek(0)
+                cur.copy_from(buffer, 'faces_de_logradouros_2019', sep=';')
+                conn.commit()
+                cur.close()
+                conn.close()
+
+            except Exception as inst:
+                print (inst)
+                pass
+
 for k in dir_list:
     try:
         print(k)
