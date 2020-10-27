@@ -40,7 +40,7 @@ def download_send_bd(ft):
                         i='0'
                     instancias_edit.append(str(i))
                 data.append(";".join(instancias_edit))
-            conn = psycopg2.connect("host='localhost' port='5432' dbname='cnefe' user='raphael' password='rapha9182'")
+            conn = psycopg2.connect("host='localhost' port='5432' dbname='mun_covid' user='usuarioexterno' password='usuarioOGLusuarioexterno'")
             cur = conn.cursor()
             buffer = StringIO()
             data_csv_format = '\n'.join(data)
